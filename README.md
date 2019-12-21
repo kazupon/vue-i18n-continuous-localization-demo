@@ -1,6 +1,6 @@
 # vue-i18n-continuous-translation-demo
 
-## Project setup
+## :cd: Project setup
 ```
 yarn install
 ```
@@ -22,3 +22,7 @@ yarn lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## :copyright: License
+
+[MIT](http://opensource.org/licenses/MIT)
