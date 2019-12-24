@@ -7158,10 +7158,10 @@ pn@^1.1.0:
   resolved "https://registry.yarnpkg.com/pn/-/pn-1.1.0.tgz#e2f4cef0e219f463c179ab37463e4e1ecdccbafb"
   integrity sha512-2qHaIQr2VLRFoxe2nASzsV6ef4yOOH+Fi9FBOVH6cqeSgUnoyySPZkxzLuzd+RYOQTRpROA0ztTMqxROKSb/nA==
 
-poeditor-service-provider@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/poeditor-service-provider/-/poeditor-service-provider-0.2.0.tgz#00f5444fb677111c9b030e2fcfbbf197ab130024"
-  integrity sha512-H+kWbeS4VnQtX4j6oMHRncbaRBnlkvZ6CIEUYdO1MM3dzT9bQuJwhYrY3/2ERIg8CavtzWYk/JOrkQf9UdJyZA==
+poeditor-service-provider@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/poeditor-service-provider/-/poeditor-service-provider-0.3.0.tgz#9f81ff92f4e797d56a82c59a4c5d15df73fb8a3c"
+  integrity sha512-IYBBcmitmj00phlsJ9VH5uptnebFv9B34ZqvnEgDFt36Nq54zGlM6ApyeBm0eMJ/CDiuImp5SLOAUys9u2eo/w==
   dependencies:
     axios "^0.19.0"
     debug "^4.1.1"
