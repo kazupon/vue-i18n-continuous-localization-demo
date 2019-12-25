@@ -22,5 +22,7 @@ jobs:
         GITHUB_CONTEXT: ${{ toJson(github) }}
         CI: true
       run: echo "github context ${GITHUB_CONTEXT}"
-    - name: secret
-      run: echo "${{secrets.POEDITOR_API_TOKEN}}"
+    - name: locale messages push
+      run: |
+        yarn
+        yarn i18n:push
