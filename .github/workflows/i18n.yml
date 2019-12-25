@@ -4,6 +4,8 @@ on: repository_dispatch
 
 jobs:
   push:
+    name: push local messages
+    if: github.event.action == 'i18n-push'
     runs-on: ubuntu-latest
 
     strategy:
@@ -28,3 +30,25 @@ jobs:
       run: |
         yarn
         yarn i18n:push
+  pull:
+    name: pull local messages
+    if: github.event.action == 'i18n-pull'
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x]
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm install -g yarn
+    - name: locale messages push
+      env:
+        POEDITOR_API_TOKEN: ${{ secrets.POEDITOR_API_TOKEN }}
+      run: |
+        yarn
+        yarn i18n:pull
