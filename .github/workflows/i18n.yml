@@ -23,6 +23,8 @@ jobs:
         CI: true
       run: echo "github context ${GITHUB_CONTEXT}"
     - name: locale messages push
+      env:
+        POEDITOR_API_TOKEN: ${{ secrets.POEDITOR_API_TOKEN }}
       run: |
         yarn
         yarn i18n:push
