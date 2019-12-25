@@ -20,5 +20,7 @@ jobs:
     - name: echo 
       env:
         GITHUB_CONTEXT: ${{ toJson(github) }}
+        CTX: ${{ toJson(context) }}
         CI: true
-      run: echo "${GITHUB_CONTEXT}"
+      run: echo "github context ${GITHUB_CONTEXT}"
+      run: echo "context ${CTX}"
