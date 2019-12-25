@@ -1,4 +1,5 @@
 {
   "hello": "hello i18n !!",
-  "world": "hi! DIO!"
+  "world": "hi! DIO!",
+  "term1": "term1"
 }
