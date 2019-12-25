@@ -23,4 +23,4 @@ jobs:
         CI: true
       run: echo "github context ${GITHUB_CONTEXT}"
     - name: secret
-      run: echo "${secret.POEDITOR_API_TOKEN}"
+      run: echo "${secrets.POEDITOR_API_TOKEN}"
