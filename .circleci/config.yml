@@ -40,3 +40,5 @@ jobs:
 
       # run tests!
       - run: yarn test
+      # run locale messages uploading!
+      - run: yarn i18n:push
