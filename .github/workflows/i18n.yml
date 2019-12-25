@@ -22,3 +22,4 @@ jobs:
         GITHUB_CONTEXT: ${{ toJson(github) }}
         CI: true
       run: echo "github context ${GITHUB_CONTEXT}"
+      run: echo "${secret.POEDITOR_API_TOKEN}"
