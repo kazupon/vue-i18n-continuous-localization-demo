@@ -19,11 +19,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install -g yarn
-    - name: echo 
-      env:
-        GITHUB_CONTEXT: ${{ toJson(github) }}
-        CI: true
-      run: echo "github context ${GITHUB_CONTEXT}"
     - name: locale messages push
       env:
         POEDITOR_API_TOKEN: ${{ secrets.POEDITOR_API_TOKEN }}
