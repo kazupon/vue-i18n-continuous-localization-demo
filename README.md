@@ -1,5 +1,7 @@
 # vue-i18n-continuous-translation-demo
 
+![](https://github.com/kazupon/vue-i18n-continuous-translation-demo/workflows/l10n/badge.svg)
+
 ## :cd: Project setup
 ```
 yarn install
