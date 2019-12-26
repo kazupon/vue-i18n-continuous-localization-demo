@@ -1,5 +1,21 @@
 {
-  "hello": "hello i18n !!",
-  "world": "hi! DIO!",
-  "term1": "term1"
+  "App": {
+    "title": "Application",
+    "lang": "Change languages"
+  },
+  "components": {
+    "Modal": {
+      "ok": "OK",
+      "cancel": "Cancel"
+    },
+    "nest": {
+      "RankingTable": {
+        "headers": {
+          "rank": "Rank",
+          "name": "Name",
+          "score": "Score"
+        }
+      }
+    }
+  }
 }
