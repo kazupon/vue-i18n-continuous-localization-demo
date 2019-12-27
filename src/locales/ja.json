@@ -7,6 +7,15 @@
     "Modal": {
       "ok": "OK",
       "cancel": "キャンセル"
+    },
+    "nest": {
+      "RankingTable": {
+        "headers": {
+          "rank": "",
+          "name": "",
+          "score": ""
+        }
+      }
     }
   },
   "pages": {
