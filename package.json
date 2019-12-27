@@ -9,8 +9,8 @@
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'",
-    "i18n:push": "vue-i18n-locale-message push --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --target-paths=./src/locales/*.json --filename-match='^([\\w]*)\\.json'",
-    "i18n:pull": "vue-i18n-locale-message pull --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --output=./src/locales/pull"
+    "i18n:push": "vue-i18n-locale-message push --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --normalize=flat --target-paths=./src/locales/*.json --filename-match='^([\\w]*)\\.json'",
+    "i18n:pull": "vue-i18n-locale-message pull --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --normalize=hierarchy --output=./src/locales/pull"
   },
   "dependencies": {
     "core-js": "^3.4.3",
