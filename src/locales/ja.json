@@ -1,10 +1,7 @@
 {
   "App": {
     "title": "アプリケーション",
-    "lang": "言語切り替え",
-    "items": [
-      "item1", "item2"
-    ]
+    "lang": "言語切り替え"
   },
   "components": {
     "Modal": {
