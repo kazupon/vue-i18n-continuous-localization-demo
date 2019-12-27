@@ -17,5 +17,13 @@
         }
       }
     }
+  },
+  "pages": {
+    "Login": {
+      "id": "id",
+      "password": "password",
+      "confirm": "confirm",
+      "button": "button"
+    }
   }
 }
