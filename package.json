@@ -11,7 +11,10 @@
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'",
     "i18n:diff": "vue-i18n-locale-message diff --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --normalize=hierarchy --target-paths=./src/locales/*.json --filename-match='^([\\w]*)\\.json'",
     "i18n:push": "vue-i18n-locale-message push --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --normalize=flat --target-paths=./src/locales/*.json --filename-match='^([\\w]*)\\.json'",
-    "i18n:pull": "vue-i18n-locale-message pull --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --normalize=hierarchy --output=./src/locales/pull"
+    "i18n:pull": "vue-i18n-locale-message pull --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --normalize=hierarchy --output=./src/locales/pull",
+    "i18n:status": "vue-i18n-locale-message status --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json",
+    "i18n:import": "vue-i18n-locale-message import --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --target-paths=./src/locales/pull/*.xliff --filename-match='^([\\w]*)\\.xliff'",
+    "i18n:export": "vue-i18n-locale-message export --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --output=./src/locales/pull --format=xliff"
   },
   "dependencies": {
     "core-js": "^3.4.3",
@@ -30,7 +33,7 @@
     "eslint-plugin-vue": "^6.0.0",
     "poeditor-service-provider": "^0.7.0",
     "vue-cli-plugin-i18n": "^0.6.0",
-    "vue-i18n-locale-message": "^0.13.0",
+    "vue-i18n-locale-message": "^0.13.1",
     "vue-template-compiler": "^2.6.10"
   },
   "eslintConfig": {
