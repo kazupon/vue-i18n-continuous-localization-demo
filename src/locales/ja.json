@@ -11,9 +11,9 @@
     "nest": {
       "RankingTable": {
         "headers": {
-          "rank": "",
-          "name": "",
-          "score": ""
+          "rank": "ランク",
+          "name": "名前",
+          "score": "スコア"
         }
       }
     }
