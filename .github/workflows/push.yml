@@ -71,5 +71,4 @@ jobs:
     - run: cat tmp/ja.json
     - run: cat tmp/en.json
     - name: import localization resource to l10n service
-      run: |
-        echo "upload l10n resource to l10n service!"
+      run: npx vue-i18n-locale-message push --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --normalize=flat --target-paths ./tmp/*.json --filename-match='^([\\w]*)\\.json
