@@ -14,6 +14,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - run: pwd
+
     - name: Checkout
       uses: actions/checkout@v1
 
@@ -50,6 +52,7 @@ jobs:
     needs: [prepare]
 
     steps:
+    - run: pwd
     - name: Checkout
       uses: actions/checkout@v1
     - run: ls -lart
@@ -75,8 +78,9 @@ jobs:
       with:
         node-version: 12
       
+    - run: pwd
     - run: node -e "console.log(require('poeditor-service-provider'))"
-    
+
     - name: Download l10n resources
       uses: actions/download-artifact@v1
       with:
