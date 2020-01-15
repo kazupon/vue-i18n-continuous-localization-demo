@@ -14,8 +14,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - run: pwd
-
     - name: Checkout
       uses: actions/checkout@v1
 
@@ -24,18 +22,20 @@ jobs:
       with:
         node-version: 12
       
-    - name: Get npm cache directory
-      id: npm-cache
-      run: |
-        echo "::set-output name=dir::$(npm config get cache)"
+#    - name: Get npm cache directory
+#      id: npm-cache
+#      run: |
+#        echo "::set-output name=dir::$(npm config get cache)"
+#
+#    - name: Caching 
+#      uses: actions/cache@v1
+#      with:
+#        path: ${{ steps.npm-cache.outputs.dir }}
+#        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+#        restore-keys: |
+#          ${{ runner.os }}-node-
 
-    - name: Caching 
-      uses: actions/cache@v1
-      with:
-        path: ${{ steps.npm-cache.outputs.dir }}
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
+    - run: ls -lart
 
     - name: Check l10n labeled issues
       uses: kazupon/issue-count@v0.1.0
@@ -78,7 +78,7 @@ jobs:
       with:
         node-version: 12
       
-    - run: pwd
+    - run: ls -lart
     - run: node -e "console.log(require('poeditor-service-provider'))"
 
     - name: Download l10n resources
