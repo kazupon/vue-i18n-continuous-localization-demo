@@ -31,7 +31,7 @@ jobs:
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
-    - run: npm install
+    - run: npm ci
     - name: Check l10n labeled issues
       uses: kazupon/issue-count@v0.1.0
       with:
@@ -63,7 +63,7 @@ jobs:
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
-    - run: npm install
+    - run: npm ci
     - run: mkdir -p ./tmp
     - run: npx vue-i18n-locale-message sqz --target=./src --split --output=./tmp
     - name: upload extracted l10n resources
@@ -95,7 +95,7 @@ jobs:
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
-    - run: npm install
+    - run: npm ci
     - name: Download l10n resources
       uses: actions/download-artifact@v1
       with:
@@ -105,4 +105,4 @@ jobs:
       env:
         DEBUG: '*'
         POEDITOR_API_TOKEN: ${{ secrets.POEDITOR_API_TOKEN }}
-      run: npx vue-i18n-locale-message push --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --normalize=flat --target-paths=./tmp/*.json --filename-match='^([\\w]*)\\.json'
+      run: npx vue-i18n-locale-message push --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --normalize=flat --target-paths=./tmp/*.json --filename-match=^([\\w]*)\\.json
