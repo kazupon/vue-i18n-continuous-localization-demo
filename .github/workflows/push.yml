@@ -18,7 +18,7 @@ jobs:
       uses: actions/checkout@v1
 
     - run: ls -lart
-    
+
     - name: Use Node.js v12
       uses: actions/setup-node@v1
       with:
@@ -52,6 +52,7 @@ jobs:
     needs: [prepare]
 
     steps:
+    - run: ls -lart
     - run: mkdir -p ./tmp
     - run: npx vue-i18n-locale-message sqz --target=./src --split --output=./tmp
     - name: upload extracted l10n resources
