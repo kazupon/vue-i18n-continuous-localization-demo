@@ -22,6 +22,7 @@ jobs:
       with:
         node-version: 12
       
+    - run: npm install
 #    - name: Get npm cache directory
 #      id: npm-cache
 #      run: |
@@ -34,8 +35,6 @@ jobs:
 #        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 #        restore-keys: |
 #          ${{ runner.os }}-node-
-
-    - run: ls -lart
 
     - name: Check l10n labeled issues
       uses: kazupon/issue-count@v0.1.0
@@ -55,6 +54,11 @@ jobs:
     - run: pwd
     - name: Checkout
       uses: actions/checkout@v1
+    - name: Use Node.js v12
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12
+    - run: npm install
     - run: ls -lart
     - run: mkdir -p ./tmp
     - run: npx vue-i18n-locale-message sqz --target=./src --split --output=./tmp
@@ -78,7 +82,8 @@ jobs:
       with:
         node-version: 12
       
-    - run: ls -lart
+    - run: npm install
+    - run: pwd
     - run: node -e "console.log(require('poeditor-service-provider'))"
 
     - name: Download l10n resources
