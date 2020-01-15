@@ -35,7 +35,7 @@ jobs:
           ${{ runner.os }}-node-
 
     - name: Check l10n labeled issues
-      uses: kazupon/issue-count
+      uses: kazupon/issue-count@v0.1.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         labels: 'l10n'
