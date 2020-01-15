@@ -75,11 +75,6 @@ jobs:
       with:
         node-version: 12
       
-    - name: Get npm cache directory
-      id: npm-cache
-      run: |
-        echo "::set-output name=dir::$(npm config get cache)"
-
     - name: Download l10n resources
       uses: actions/download-artifact@v1
       with:
