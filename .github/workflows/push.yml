@@ -91,9 +91,8 @@ jobs:
       with:
         name: l10n-resource
         path: tmp
-    - run: cat tmp/ja.json
-    - run: cat tmp/en.json
-    - run: cat poeditor-service-provider-conf.json
-    - run: node -e 'console.log(process.env)'
+
     - name: import localization resource to l10n service
+      env:
+        POEDITOR_API_TOKEN: ${{ secrets.POEDITOR_API_TOKEN }}
       run: npx vue-i18n-locale-message push --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --normalize=flat --target-paths=./tmp/*.json --filename-match='^([\\w]*)\\.json'
