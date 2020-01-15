@@ -1,0 +1,75 @@
+name: Push locale messages
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - master
+
+jobs:
+  prepare:
+    name: Prepare environments
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Use Node.js v12
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12
+      
+    - name: Get npm cache directory
+      id: npm-cache
+      run: |
+        echo "::set-output name=dir::$(npm config get cache)"
+
+    - name: Caching 
+      uses: actions/cache@v1
+      with:
+        path: ${{ steps.npm-cache.outputs.dir }}
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
+    - name: Check l10n labeled issues
+      uses: kazupon/issue-count
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        labels: 'l10n'
+
+    - name: Check translation status
+      run: npx vue-i18n-locale-message status --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json
+
+  extract:
+    name: Extract l10n resource
+    runs-on: ubuntu-latest
+    needs: [prepare]
+
+    steps:
+    - run: mkdir -p ./tmp
+    - run: npx vue-i18n-locale-message sqz --target=./src --split --output=./tmp
+    - name: upload extracted l10n resources
+      uses: actions/upload-artifact@v1
+      with:
+        name: l10n-resource
+        path: tmp
+
+  push:
+    name: Push l10n resource to l10n service
+    runs-on: ubuntu-latest
+    needs: [extract]
+
+    steps:
+    - name: Download l10n resources
+      uses: actions/download-artifact@v1
+      with:
+        name: l10n-resource
+        path: tmp
+    - run: cat tmp/ja.json
+    - run: cat tmp/en.json
+    - name: import localization resource to l10n service
+      run: |
+        echo "upload l10n resource to l10n service!"
