@@ -16,32 +16,27 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v1
-
     - name: Use Node.js v12
       uses: actions/setup-node@v1
       with:
         node-version: 12
-      
+    - name: Get npm cache directory
+      id: npm-cache
+      run: |
+        echo "::set-output name=dir::$(npm config get cache)"
+    - name: Caching 
+      uses: actions/cache@v1
+      with:
+        path: ${{ steps.npm-cache.outputs.dir }}
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
     - run: npm install
-#    - name: Get npm cache directory
-#      id: npm-cache
-#      run: |
-#        echo "::set-output name=dir::$(npm config get cache)"
-#
-#    - name: Caching 
-#      uses: actions/cache@v1
-#      with:
-#        path: ${{ steps.npm-cache.outputs.dir }}
-#        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-#        restore-keys: |
-#          ${{ runner.os }}-node-
-
     - name: Check l10n labeled issues
       uses: kazupon/issue-count@v0.1.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         labels: 'l10n'
-
     - name: Check translation status
       run: npx vue-i18n-locale-message status --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json
 
@@ -51,15 +46,24 @@ jobs:
     needs: [prepare]
 
     steps:
-    - run: pwd
     - name: Checkout
       uses: actions/checkout@v1
     - name: Use Node.js v12
       uses: actions/setup-node@v1
       with:
         node-version: 12
+    - name: Get npm cache directory
+      id: npm-cache
+      run: |
+        echo "::set-output name=dir::$(npm config get cache)"
+    - name: Caching 
+      uses: actions/cache@v1
+      with:
+        path: ${{ steps.npm-cache.outputs.dir }}
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
     - run: npm install
-    - run: ls -lart
     - run: mkdir -p ./tmp
     - run: npx vue-i18n-locale-message sqz --target=./src --split --output=./tmp
     - name: upload extracted l10n resources
@@ -76,23 +80,29 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v1
-
-    - run: ls -lart
-
     - name: Use Node.js v12
       uses: actions/setup-node@v1
       with:
         node-version: 12
-      
+    - name: Get npm cache directory
+      id: npm-cache
+      run: |
+        echo "::set-output name=dir::$(npm config get cache)"
+    - name: Caching 
+      uses: actions/cache@v1
+      with:
+        path: ${{ steps.npm-cache.outputs.dir }}
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
     - run: npm install
-
     - name: Download l10n resources
       uses: actions/download-artifact@v1
       with:
         name: l10n-resource
         path: tmp
-
     - name: import localization resource to l10n service
       env:
+        DEBUG: *
         POEDITOR_API_TOKEN: ${{ secrets.POEDITOR_API_TOKEN }}
       run: npx vue-i18n-locale-message push --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --normalize=flat --target-paths=./tmp/*.json --filename-match='^([\\w]*)\\.json'
