@@ -56,3 +56,13 @@ a {
   color: #42b983;
 }
 </style>
+
+<i18n>
+{
+  "en": {
+    "pulugins": "For a guide and recipes on how to configure / customize this project",
+    "links": "Essential Links",
+    "ecosystem": "Ecosystem"
+  }
+}
+</i18n>

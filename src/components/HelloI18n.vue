@@ -12,6 +12,9 @@ export default {
 {
   "en": {
     "hello": "Hello i18n in SFC!"
+  },
+  "ja": {
+    "hello": "こんにちは"
   }
 }
 </i18n>
