@@ -75,6 +75,8 @@ jobs:
       with:
         node-version: 12
       
+    - run: node -e "console.log(require('poeditor-service-provider'))"
+    
     - name: Download l10n resources
       uses: actions/download-artifact@v1
       with:
