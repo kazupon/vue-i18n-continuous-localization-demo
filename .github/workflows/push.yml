@@ -78,7 +78,7 @@ jobs:
       uses: actions/checkout@v1
 
     - run: ls -lart
-    
+
     - name: Use Node.js v12
       uses: actions/setup-node@v1
       with:
@@ -93,7 +93,7 @@ jobs:
         path: tmp
     - run: cat tmp/ja.json
     - run: cat tmp/en.json
-    - run: cat poeditor-serivce-provider-conf.json
+    - run: cat poeditor-service-provider-conf.json
     - run: node -e 'console.log(process.env)'
     - name: import localization resource to l10n service
       run: npx vue-i18n-locale-message push --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --normalize=flat --target-paths=./tmp/*.json --filename-match='^([\\w]*)\\.json'
