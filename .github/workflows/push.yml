@@ -1,12 +1,12 @@
 name: Push locale messages
 
 on:
-  push:
-#  pull_request:
-#    types:
-#      - closed
-#    branches:
-#      - master
+#  push:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - master
 
 jobs:
   prepare:
@@ -103,6 +103,5 @@ jobs:
         path: tmp
     - name: import localization resource to l10n service
       env:
-        DEBUG: '*'
         POEDITOR_API_TOKEN: ${{ secrets.POEDITOR_API_TOKEN }}
       run: npx vue-i18n-locale-message push --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --normalize=flat --target-paths=./tmp/*.json --filename-match=^\([\\w]*\)\\.json
