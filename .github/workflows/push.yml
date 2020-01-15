@@ -105,4 +105,4 @@ jobs:
       env:
         DEBUG: '*'
         POEDITOR_API_TOKEN: ${{ secrets.POEDITOR_API_TOKEN }}
-      run: npx vue-i18n-locale-message push --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --normalize=flat --target-paths=./tmp/*.json --filename-match=^([\\w]*)\\.json
+      run: npx vue-i18n-locale-message push --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --normalize=flat --target-paths=./tmp/*.json --filename-match=^\([\\w]*\)\\.json
