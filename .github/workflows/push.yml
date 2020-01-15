@@ -1,11 +1,12 @@
 name: Push locale messages
 
 on:
-  pull_request:
-    types:
-      - closed
-    branches:
-      - master
+  push:
+#  pull_request:
+#    types:
+#      - closed
+#    branches:
+#      - master
 
 jobs:
   prepare:
@@ -16,6 +17,8 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v1
 
+    - run: ls -lart
+    
     - name: Use Node.js v12
       uses: actions/setup-node@v1
       with:
