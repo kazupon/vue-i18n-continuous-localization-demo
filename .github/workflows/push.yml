@@ -77,6 +77,8 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v1
 
+    - run: ls -lart
+    
     - name: Use Node.js v12
       uses: actions/setup-node@v1
       with:
