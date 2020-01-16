@@ -1,0 +1,48 @@
+name: Pull locale messages
+
+on: push
+  #repository_dispatch
+
+jobs:
+  pull:
+    name: pull local messages
+    #if: github.event.action == 'i18n-pull'
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Use Node.js v12
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12
+    - name: Get npm cache directory
+      id: npm-cache
+      run: |
+        echo "::set-output name=dir::$(npm config get cache)"
+    - name: Caching 
+      uses: actions/cache@v1
+      with:
+        path: ${{ steps.npm-cache.outputs.dir }}
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+    - run: npm ci
+    - name: Check l10n labeled issues
+      uses: kazupon/issue-count@v0.1.0
+      id: issue
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        labels: 'l10n'
+    - name: Pull locale messages
+      if: steps.issue.outputs.count == 0
+      env:
+        POEDITOR_API_TOKEN: ${{ secrets.POEDITOR_API_TOKEN }}
+      run: |
+        mkdir ./tmp
+        npx vue-i18n-locale-message pull --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --normalize=hierarchy --output=./tmp
+    - run: cat ./tmp/en.json
+    - run: cat ./tmp/ja.json
+    - name: Apply locale messages to SFCs
+      run: npx vue-i18n-locale-message infuse --target=./src --locales=./tmp --match=^\([\\w]*\)\\.json"
+    - run: git diff
