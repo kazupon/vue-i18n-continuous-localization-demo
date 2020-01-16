@@ -44,5 +44,5 @@ jobs:
     - run: cat ./tmp/en.json
     - run: cat ./tmp/ja.json
     - name: Apply locale messages to SFCs
-      run: npx vue-i18n-locale-message infuse --target=./src --locales=./tmp --match=^\([\\w]*\)\\.json"
+      run: npx vue-i18n-locale-message infuse --target=./src --locales=./tmp --match=^\([\\w]*\)\\.json
     - run: git diff
