@@ -39,7 +39,7 @@ jobs:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         labels: 'l10n'
     - name: Check translation status
-      if: steps.issue.outputs.count > 0
+      if: steps.issue.outputs.count == 0
       run: npx vue-i18n-locale-message status --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json
 
   extract:
