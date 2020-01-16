@@ -42,10 +42,10 @@ jobs:
       run: |
         mkdir ./tmp
         npx vue-i18n-locale-message pull --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --normalize=hierarchy --output=./tmp
-    - run: cat ./tmp/en.json
-    - run: cat ./tmp/ja.json
     - name: Apply locale messages to SFCs
       run: npx vue-i18n-locale-message infuse --target=./src --locales=./tmp --match=^\([\\w]*\)\\.json
+    - name: Remove locale tmp
+      run: rm -rf ./tmp
     - name: Create pull request
       uses: peter-evans/create-pull-request@v2
       id: cpr
