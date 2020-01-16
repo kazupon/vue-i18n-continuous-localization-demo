@@ -9,7 +9,7 @@ on:
       - master
 
 jobs:
-  prepare:
+  extract:
     name: Prepare environments
     runs-on: ubuntu-latest
 
@@ -31,44 +31,30 @@ jobs:
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
-    - run: npm ci
+    - name: Update dependency modules
+      run: npm ci
     - name: Check l10n labeled issues
-      uses: kazupon/issue-count@v0.1.0
+      uses: kazupon/issue-count@v0.2.0
       id: issue
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        labels: 'l10n'
+        labels: l10n
+        state: open
     - name: Check translation status
       if: steps.issue.outputs.count == 0
       run: npx vue-i18n-locale-message status --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json
-
-  extract:
-    name: Extract l10n resource
-    runs-on: ubuntu-latest
-    needs: [prepare]
-
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v1
-    - name: Use Node.js v12
-      uses: actions/setup-node@v1
-      with:
-        node-version: 12
-    - name: Get npm cache directory
-      id: npm-cache
+    - name: Check issue count
       run: |
-        echo "::set-output name=dir::$(npm config get cache)"
-    - name: Caching 
-      uses: actions/cache@v1
-      with:
-        path: ${{ steps.npm-cache.outputs.dir }}
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
-    - run: npm ci
+        if [ ${{ steps.issue.outputs.count }} -eq 0 ]; then
+          echo 'issue count: ok'
+        else
+          echo 'exsit l10n labeled issue, please check issues!'
+          exit 1
+        fi
     - run: mkdir -p ./tmp
-    - run: npx vue-i18n-locale-message sqz --target=./src --split --output=./tmp
-    - name: upload extracted l10n resources
+    - name: Extract l10n resources from SFCs
+      run: npx vue-i18n-locale-message sqz --target=./src --split --output=./tmp
+    - name: Upload extracted l10n resources
       uses: actions/upload-artifact@v1
       with:
         name: l10n-resource
@@ -97,7 +83,8 @@ jobs:
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
-    - run: npm ci
+    - name: Update dependency modules
+      run: npm ci
     - name: Download l10n resources
       uses: actions/download-artifact@v1
       with:
