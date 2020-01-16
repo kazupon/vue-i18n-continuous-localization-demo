@@ -47,15 +47,15 @@ jobs:
     - name: Apply locale messages to SFCs
       run: npx vue-i18n-locale-message infuse --target=./src --locales=./tmp --match=^\([\\w]*\)\\.json
     - name: Create pull request
-        uses: peter-evans/create-pull-request@v2
-        id: cpr
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          title: 'Sync locale messages from l10n service'
-          labels: l10n
-          branch: l10n
-          branch-suffix: timestamp
+      uses: peter-evans/create-pull-request@v2
+      id: cpr
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        title: 'Sync locale messages from l10n service'
+        labels: l10n
+        branch: l10n
+        branch-suffix: timestamp
     - name: Check pull request outputs
-        run: |
-          echo "Pull Request Number - ${{ env.PULL_REQUEST_NUMBER }}"
-          echo "Pull Request Number - ${{ steps.cpr.outputs.pr_number }}"
+      run: |
+        echo "Pull Request Number - ${{ env.PULL_REQUEST_NUMBER }}"
+        echo "Pull Request Number - ${{ steps.cpr.outputs.pr_number }}"
