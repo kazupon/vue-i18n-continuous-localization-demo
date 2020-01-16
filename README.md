@@ -1,6 +1,7 @@
 # vue-i18n-continuous-translation-demo
 
-![](https://github.com/kazupon/vue-i18n-continuous-translation-demo/workflows/l10n/badge.svg)
+![](https://github.com/kazupon/vue-i18n-continuous-translation-demo/workflows/push/badge.svg)
+![](https://github.com/kazupon/vue-i18n-continuous-translation-demo/workflows/pull/badge.svg)
 
 ## :cd: Project setup
 ```
