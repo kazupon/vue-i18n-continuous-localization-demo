@@ -8,6 +8,9 @@ on:
     branches:
       - master
 
+env:
+  POEDITOR_API_TOKEN: ${{ secrets.POEDITOR_API_TOKEN }}
+
 jobs:
   extract:
     name: Extract l10n resources
@@ -50,13 +53,15 @@ jobs:
         fi
     - name: Get translation status
       if: success()
-      run: npx vue-i18n-locale-message status --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json
+      run: |
+        npx vue-i18n-locale-message status --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json
     - name: Check translation status
       if: success()
       run: echo 'Translation ready!'
     - run: mkdir -p ./tmp
     - name: Extract l10n resources from SFCs
-      run: npx vue-i18n-locale-message sqz --target=./src --split --output=./tmp
+      run: |
+        npx vue-i18n-locale-message sqz --target=./src --split --output=./tmp
     - name: Check locale message differences
       run: |
         npx vue-i18n-locale-message diff --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --normalize=hierarchy --target-paths=./tmp/*.json --filename-match=^\([\\w]*\)\\.json
@@ -104,7 +109,5 @@ jobs:
         name: l10n-resource
         path: tmp
     - name: Import localization resource to l10n service
-      env:
-        POEDITOR_API_TOKEN: ${{ secrets.POEDITOR_API_TOKEN }}
       run: |
         npx vue-i18n-locale-message push --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --normalize=flat --target-paths=./tmp/*.json --filename-match=^\([\\w]*\)\\.json
