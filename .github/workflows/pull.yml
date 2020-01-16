@@ -42,6 +42,7 @@ jobs:
         if [ ${{ steps.issue.outputs.count }} -eq 0 ]; then
           echo 'issue count: ok'
         else
+          echo 'exsit l10n labeled issue, please check issues!'
           exit 1
         fi
     - name: Pull locale messages
