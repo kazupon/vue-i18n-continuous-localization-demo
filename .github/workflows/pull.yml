@@ -28,15 +28,25 @@ jobs:
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
-    - run: npm ci
+    - name: Update dependency modules
+      run: npm ci
     - name: Check l10n labeled issues
       uses: kazupon/issue-count@v0.1.0
       id: issue
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        labels: 'l10n'
-    - name: Pull locale messages
+        labels: l10n
+        state: open
+    - name: Check issue count
       if: steps.issue.outputs.count == 0
+      run: |
+        if [ $? -eq ${{ steps.issue.outputs.count }} ]; then
+          echo 'issue count: ok'
+        else
+          exit 1
+        fi
+    - name: Pull locale messages
+      if: success()
       env:
         POEDITOR_API_TOKEN: ${{ secrets.POEDITOR_API_TOKEN }}
       run: |
