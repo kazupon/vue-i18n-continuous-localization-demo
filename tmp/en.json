@@ -1,0 +1,7 @@
+{
+  "components": {
+    "HelloI18n": {
+      "hello": "Hello i18n in SFC!"
+    }
+  }
+}

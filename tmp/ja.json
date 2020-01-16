@@ -1,0 +1,7 @@
+{
+  "components": {
+    "HelloI18n": {
+      "hello": "こんにちは i18n！"
+    }
+  }
+}
