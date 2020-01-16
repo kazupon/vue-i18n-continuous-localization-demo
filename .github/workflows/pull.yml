@@ -39,7 +39,7 @@ jobs:
         state: open
     - name: Check issue count
       run: |
-        if [ $? -eq ${{ steps.issue.outputs.count }} ]; then
+        if [ ${{ steps.issue.outputs.count }} -eq 0 ]; then
           echo 'issue count: ok'
         else
           exit 1
