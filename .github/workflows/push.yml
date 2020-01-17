@@ -20,7 +20,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v1
     - name: Use Node.js v12
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v1.1.0
       with:
         node-version: 12
     - name: Get npm cache directory
@@ -36,7 +36,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-node-
     - name: Install dependency modules
-      #if: steps.cache.outputs.cache-hit != 'true'
+      if: steps.cache.outputs.cache-hit != 'true'
       run: npm ci
     - name: Get l10n labeled issue count
       uses: kazupon/issue-count@v0.2.0
