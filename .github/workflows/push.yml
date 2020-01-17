@@ -1,12 +1,12 @@
 name: Push locale messages
 
-on:
-#  push:
-  pull_request:
-    types:
-      - closed
-    branches:
-      - master
+on:  [push]
+# on:
+#   pull_request:
+#     types:
+#       - closed
+#     branches:
+#       - master
 
 env:
   POEDITOR_API_TOKEN: ${{ secrets.POEDITOR_API_TOKEN }}
@@ -29,12 +29,14 @@ jobs:
         echo "::set-output name=dir::$(npm config get cache)"
     - name: Caching 
       uses: actions/cache@v1
+      id: cache
       with:
         path: ${{ steps.npm-cache.outputs.dir }}
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
-    - name: Update dependency modules
+    - name: Install dependency modules
+      if: steps.cache.outputs.cache-hit != 'true'
       run: npm ci
     - name: Get l10n labeled issue count
       uses: kazupon/issue-count@v0.2.0
@@ -101,7 +103,8 @@ jobs:
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
-    - name: Update dependency modules
+    - name: Install dependency modules
+      if: steps.cache.outputs.cache-hit != 'true'
       run: npm ci
     - name: Download l10n resources
       uses: actions/download-artifact@v1
