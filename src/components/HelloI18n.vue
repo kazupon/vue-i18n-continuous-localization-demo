@@ -14,7 +14,7 @@ export default {
     "hello": "Hello i18n in SFC!"
   },
   "ja": {
-    "hello": "こんにちは i18n！！！！"
+    "hello": "こんにちはi18n！"
   }
 }
 </i18n>
