@@ -84,7 +84,7 @@ jobs:
           echo 'There are differences!'
           echo "::set-output name=code::0"
         else
-          echo 'No difference!'
+          echo 'No difference!!'
           exit 1
         fi
     - name: Upload extracted l10n resources
