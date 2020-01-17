@@ -54,24 +54,29 @@ jobs:
           echo 'exsit l10n labeled issue, please check issues!'
           exit 1
         fi
-    - name: Get translation status
-      if: success()
-      run: |
-        npx vue-i18n-locale-message status --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json
     - name: Check translation status
       if: success()
-      run: echo 'Translation ready!'
-    - run: mkdir -p ./tmp
+      run: |
+        output = $(npx vue-i18n-locale-message status --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json)
+        result = $?
+        if [ "$?" -eq 0 ]; then
+          echo 'Translation completed !'
+        else
+          echo 'Translation WIP !'
+          exit 1
+        fi
+    - name: Setup locale temp 
+      if: success()
+      run: |
+        mkdir -p ./tmp
     - name: Extract l10n resources from SFCs
       run: |
         npx vue-i18n-locale-message sqz --target=./src --split --output=./tmp
-    - name: Get locale message differences
-      id: diff
-      run: |
-        echo "::set-output name=ret::$(npx vue-i18n-locale-message diff --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --normalize=hierarchy --target-paths=./tmp/*.json --filename-match=^\([\\w]*\)\\.json)"
     - name: Check locale message differences
       run: |
-        if [ ${{ steps.diff.outputs.ret }} -eq 64 ]; then
+        output = $(npx vue-i18n-locale-message diff --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --normalize=hierarchy --target-paths=./tmp/*.json --filename-match=^\([\\w]*\)\\.json)")
+        result = $?
+        if [ "$result" -eq 64 ]; then
           echo 'There are differences!'
         else
           echo 'No difference!'
