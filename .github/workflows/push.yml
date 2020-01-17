@@ -81,6 +81,7 @@ jobs:
         echo $result
         if [ "$result" -eq 64 ]; then
           echo 'There are differences!'
+          exit 0
         else
           echo 'No difference!'
           exit 1
