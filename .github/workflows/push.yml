@@ -1,12 +1,12 @@
 name: Push locale messages
 
-on:  [push]
-# on:
-#   pull_request:
-#     types:
-#       - closed
-#     branches:
-#       - master
+# on:  [push]
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - master
 
 env:
   POEDITOR_API_TOKEN: ${{ secrets.POEDITOR_API_TOKEN }}
@@ -47,26 +47,19 @@ jobs:
         labels: l10n
         state: open
     - name: Check issue count
+      if: steps.issue.outputs.count == 0
       run: |
-        if [ ${{ steps.issue.outputs.count }} -eq 0 ]; then
-          echo 'issue count: ok'
-        else
-          echo 'exsit l10n labeled issue, please check issues!'
-          exit 1
-        fi
+       exit 1
+      #run: |
+      #  if [ ${{ steps.issue.outputs.count }} -eq 0 ]; then
+      #    echo 'issue count: ok'
+      #  else
+      #    echo 'exsit l10n labeled issue, please check issues!'
+      #    exit 1
+      #  fi
     - name: Check translation status
       if: success()
       uses: ./.github/actions/translation-status-action
-      # run: |
-      #   output=$( npx vue-i18n-locale-message status --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json )
-      #   result=$?
-      #   echo $result
-      #   if [ "$result" -eq 0 ]; then
-      #     echo 'Translation completed!'
-      #   else
-      #     echo 'Translation WIP!'
-      #     exit 1
-      #   fi
     - name: Setup locale temp 
       if: success()
       run: |
@@ -76,19 +69,6 @@ jobs:
         npx vue-i18n-locale-message sqz --target=./src --split --output=./tmp
     - name: Check locale message differences
       uses: ./.github/actions/locale-message-diff-action
-      # id: diff-exit-code
-      # run: |
-      #   output=$( npx vue-i18n-locale-message diff --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --normalize=hierarchy --target-paths=./tmp/*.json --filename-match=^\([\\w]*\)\\.json )
-      #   result=$?
-      #   echo $output
-      #   echo $result
-      #   if [ "$result" -eq 64 ]; then
-      #     echo 'There are differences!'
-      #     echo "::set-output name=code::0"
-      #   else
-      #     echo 'No difference!!'
-      #     exit 1
-      #   fi
     - name: Upload extracted l10n resources
       if: success()
       uses: actions/upload-artifact@v1
