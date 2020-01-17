@@ -27,7 +27,7 @@ jobs:
       id: npm-cache
       run: |
         echo "::set-output name=dir::$(npm config get cache)"
-    - name: Caching 
+    - name: Cache npm
       uses: actions/cache@v1.1.0
       id: cache
       with:
@@ -35,8 +35,16 @@ jobs:
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
+    - name: Cache node_modules
+      uses: actions/cache@v1.1.0
+      id: cache-node_modules
+      with:
+        path: ./node_modules
+        key: ${{ runner.os }}-l10n-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-l10n-
     - name: Install dependency modules
-      if: steps.cache.outputs.cache-hit != 'true'
+      #if: steps.cache.outputs.cache-hit != 'true' || steps.cache-node_modules.outputs.cache_hit != 'true'
       run: npm ci
     - name: Get l10n labeled issue count
       uses: kazupon/issue-count@v0.2.0
