@@ -70,7 +70,8 @@ jobs:
         npx vue-i18n-locale-message diff --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --normalize=hierarchy --target-paths=./tmp/*.json --filename-match=^\([\\w]*\)\\.json
     - name: Check locale message differences
       run: |
-        if [ $? -eq 64 ]; then
+        $ret = npx vue-i18n-locale-message diff --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --normalize=hierarchy --target-paths=./tmp/*.json --filename-match=^\([\\w]*\)\\.json
+        if [ $ret -eq 64 ]; then
           echo 'There are differences!'
         else
           echo 'No difference!'
