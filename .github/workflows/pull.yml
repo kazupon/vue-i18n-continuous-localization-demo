@@ -1,12 +1,12 @@
 name: Pull locale messages
 
-on: push
-#on: repository_dispatch
+#on: push
+on: repository_dispatch
 
 jobs:
   pull:
     name: pull local messages
-    #if: github.event.action == 'i18n-pull'
+    if: github.event.action == 'i18n-pull'
     runs-on: ubuntu-latest
 
     steps:
@@ -40,16 +40,10 @@ jobs:
         labels: l10n
         state: open
     - name: Check issue count
-      if: steps.issue.outputs.count == 0
+      if: steps.issue.outputs.count > 0
       run: |
+       echo 'exsit l10n labeled issue, please check issues!'
        exit 1
-      #run: |
-      #  if [ ${{ steps.issue.outputs.count }} -eq 0 ]; then
-      #    echo 'issue count: ok'
-      #  else
-      #    echo 'exsit l10n labeled issue, please check issues!'
-      #    exit 1
-      #  fi
     - name: Pull locale messages
       if: success()
       env:

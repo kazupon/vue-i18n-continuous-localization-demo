@@ -47,16 +47,10 @@ jobs:
         labels: l10n
         state: open
     - name: Check issue count
-      if: steps.issue.outputs.count == 0
+      if: steps.issue.outputs.count > 0
       run: |
+       echo 'exsit l10n labeled issue, please check issues!'
        exit 1
-      #run: |
-      #  if [ ${{ steps.issue.outputs.count }} -eq 0 ]; then
-      #    echo 'issue count: ok'
-      #  else
-      #    echo 'exsit l10n labeled issue, please check issues!'
-      #    exit 1
-      #  fi
     - name: Check translation status
       if: success()
       uses: ./.github/actions/translation-status-action
