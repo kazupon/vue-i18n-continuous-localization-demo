@@ -1,0 +1,6 @@
+name: 'translation-status-action'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.foo }}

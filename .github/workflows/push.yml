@@ -56,16 +56,17 @@ jobs:
         fi
     - name: Check translation status
       if: success()
-      run: |
-        output=$( npx vue-i18n-locale-message status --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json )
-        result=$?
-        echo $result
-        if [ "$result" -eq 0 ]; then
-          echo 'Translation completed!'
-        else
-          echo 'Translation WIP!'
-          exit 1
-        fi
+      uses: ./.github/actions/translation-status-action
+      # run: |
+      #   output=$( npx vue-i18n-locale-message status --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json )
+      #   result=$?
+      #   echo $result
+      #   if [ "$result" -eq 0 ]; then
+      #     echo 'Translation completed!'
+      #   else
+      #     echo 'Translation WIP!'
+      #     exit 1
+      #   fi
     - name: Setup locale temp 
       if: success()
       run: |
