@@ -56,7 +56,7 @@ jobs:
     - name: Get translation status
       if: success()
       run: |
-        npx vue-i18n-locale-message status --provider=./node_modules/poeditor-service-provider --conf=poeditor-service-provider-conf.json
+        npx vue-i18n-locale-message status --provider=./node_modules/poeditor-service-provider/lib/factory.js --conf=poeditor-service-provider-conf.json
     - name: Check translation status
       if: success()
       run: echo 'Translation ready!'
