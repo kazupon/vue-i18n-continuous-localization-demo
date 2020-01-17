@@ -30,7 +30,7 @@ jobs:
           ${{ runner.os }}-node-
     - name: Update dependency modules
       run: npm ci
-    - name: Check l10n labeled issues
+    - name: Get l10n labeled issue count
       uses: kazupon/issue-count@v0.2.0
       id: issue
       with:
