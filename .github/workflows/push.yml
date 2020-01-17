@@ -28,23 +28,15 @@ jobs:
       run: |
         echo "::set-output name=dir::$(npm config get cache)"
     - name: Cache npm
-      uses: actions/cache@v1.1.0
+      uses: actions/cache@v1
       id: cache
       with:
         path: ${{ steps.npm-cache.outputs.dir }}
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
-    - name: Cache node_modules
-      uses: actions/cache@v1.1.0
-      id: cache-node_modules
-      with:
-        path: ./node_modules
-        key: ${{ runner.os }}-l10n-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-l10n-
-    - name: Install dependency modules
-      if: steps.cache.outputs.cache-hit != 'true' || steps.cache-node_modules.outputs.cache_hit != 'true'
+    - name: Install dependencies
+      if: steps.cache.outputs.cache-hit != 'true'
       run: npm ci
     - name: Get l10n labeled issue count
       uses: kazupon/issue-count@v0.2.0
@@ -64,7 +56,7 @@ jobs:
     - name: Get translation status
       if: success()
       run: |
-        npx vue-i18n-locale-message status --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json
+        npx vue-i18n-locale-message status --provider=./node_modules/poeditor-service-provider --conf=poeditor-service-provider-conf.json
     - name: Check translation status
       if: success()
       run: echo 'Translation ready!'
@@ -74,7 +66,7 @@ jobs:
         npx vue-i18n-locale-message sqz --target=./src --split --output=./tmp
     - name: Check locale message differences
       run: |
-        npx vue-i18n-locale-message diff --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --normalize=hierarchy --target-paths=./tmp/*.json --filename-match=^\([\\w]*\)\\.json
+        npx vue-i18n-locale-message diff --provider=./node_modules/poeditor-service-provider --conf=poeditor-service-provider-conf.json --normalize=hierarchy --target-paths=./tmp/*.json --filename-match=^\([\\w]*\)\\.json
         if [ $? -eq 64 ]; then
           echo 'There are differences!'
         else
@@ -104,7 +96,7 @@ jobs:
       id: npm-cache
       run: |
         echo "::set-output name=dir::$(npm config get cache)"
-    - name: Caching 
+    - name: Cache npm
       uses: actions/cache@v1
       with:
         path: ${{ steps.npm-cache.outputs.dir }}
