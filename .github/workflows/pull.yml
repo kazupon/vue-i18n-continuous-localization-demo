@@ -6,7 +6,7 @@ on: push
 jobs:
   pull:
     name: pull local messages
-    if: github.event.action == 'i18n-pull'
+    #if: github.event.action == 'i18n-pull'
     runs-on: ubuntu-latest
 
     steps:
