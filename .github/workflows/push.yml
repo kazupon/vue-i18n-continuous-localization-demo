@@ -44,7 +44,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-l10n-
     - name: Install dependency modules
-      #if: steps.cache.outputs.cache-hit != 'true' || steps.cache-node_modules.outputs.cache_hit != 'true'
+      if: steps.cache.outputs.cache-hit != 'true' || steps.cache-node_modules.outputs.cache_hit != 'true'
       run: npm ci
     - name: Get l10n labeled issue count
       uses: kazupon/issue-count@v0.2.0
