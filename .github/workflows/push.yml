@@ -59,8 +59,8 @@ jobs:
       run: |
         output=$( npx vue-i18n-locale-message status --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json )
         result=$?
-        echo $output
-        if [ "$?" -eq 0 ]; then
+        echo $result
+        if [ "$result" -eq 0 ]; then
           echo 'Translation completed !'
         else
           echo 'Translation WIP !'
@@ -75,7 +75,7 @@ jobs:
         npx vue-i18n-locale-message sqz --target=./src --split --output=./tmp
     - name: Check locale message differences
       run: |
-        output=$( npx vue-i18n-locale-message diff --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --normalize=hierarchy --target-paths=./tmp/*.json --filename-match=^\([\\w]*\)\\.json) )
+        output=$( npx vue-i18n-locale-message diff --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --normalize=hierarchy --target-paths=./tmp/*.json --filename-match=^\([\\w]*\)\\.json )
         result=$?
         echo $output
         echo $result
