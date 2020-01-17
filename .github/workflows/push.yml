@@ -75,21 +75,22 @@ jobs:
       run: |
         npx vue-i18n-locale-message sqz --target=./src --split --output=./tmp
     - name: Check locale message differences
-      id: diff-exit-code
-      run: |
-        output=$( npx vue-i18n-locale-message diff --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --normalize=hierarchy --target-paths=./tmp/*.json --filename-match=^\([\\w]*\)\\.json )
-        result=$?
-        echo $output
-        echo $result
-        if [ "$result" -eq 64 ]; then
-          echo 'There are differences!'
-          echo "::set-output name=code::0"
-        else
-          echo 'No difference!!'
-          exit 1
-        fi
+      uses: ./.github/actions/locale-message-diff-action
+      # id: diff-exit-code
+      # run: |
+      #   output=$( npx vue-i18n-locale-message diff --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --normalize=hierarchy --target-paths=./tmp/*.json --filename-match=^\([\\w]*\)\\.json )
+      #   result=$?
+      #   echo $output
+      #   echo $result
+      #   if [ "$result" -eq 64 ]; then
+      #     echo 'There are differences!'
+      #     echo "::set-output name=code::0"
+      #   else
+      #     echo 'No difference!!'
+      #     exit 1
+      #   fi
     - name: Upload extracted l10n resources
-      if: failure()
+      if: success()
       uses: actions/upload-artifact@v1
       with:
         name: l10n-resource

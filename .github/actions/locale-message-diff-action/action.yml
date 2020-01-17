@@ -1,0 +1,6 @@
+name: 'locale-message-diff-action'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.foo }}
