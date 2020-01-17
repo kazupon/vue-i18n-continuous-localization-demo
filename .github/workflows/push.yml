@@ -36,7 +36,8 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-node-
     - name: Install dependencies
-      if: steps.cache.outputs.cache-hit != 'true'
+      # DISABLE: due to not cache-hit poeditor-service-provider ...
+      # if: steps.cache.outputs.cache-hit != 'true'
       run: npm ci
     - name: Get l10n labeled issue count
       uses: kazupon/issue-count@v0.2.0
@@ -56,7 +57,7 @@ jobs:
     - name: Get translation status
       if: success()
       run: |
-        npx vue-i18n-locale-message status --provider=./node_modules/poeditor-service-provider/lib/factory.js --conf=poeditor-service-provider-conf.json
+        npx vue-i18n-locale-message status --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json
     - name: Check translation status
       if: success()
       run: echo 'Translation ready!'
@@ -64,9 +65,11 @@ jobs:
     - name: Extract l10n resources from SFCs
       run: |
         npx vue-i18n-locale-message sqz --target=./src --split --output=./tmp
+    - name: Diff from local and l10n service
+      run: |
+        npx vue-i18n-locale-message diff --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --normalize=hierarchy --target-paths=./tmp/*.json --filename-match=^\([\\w]*\)\\.json
     - name: Check locale message differences
       run: |
-        npx vue-i18n-locale-message diff --provider=./node_modules/poeditor-service-provider --conf=poeditor-service-provider-conf.json --normalize=hierarchy --target-paths=./tmp/*.json --filename-match=^\([\\w]*\)\\.json
         if [ $? -eq 64 ]; then
           echo 'There are differences!'
         else
@@ -104,7 +107,8 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-node-
     - name: Install dependency modules
-      if: steps.cache.outputs.cache-hit != 'true'
+      # DISABLE: due to not cache-hit poeditor-service-provider ...
+      # if: steps.cache.outputs.cache-hit != 'true'
       run: npm ci
     - name: Download l10n resources
       uses: actions/download-artifact@v1
