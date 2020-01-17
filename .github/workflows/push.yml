@@ -61,9 +61,9 @@ jobs:
         result=$?
         echo $result
         if [ "$result" -eq 0 ]; then
-          echo 'Translation completed !'
+          echo 'Translation completed!'
         else
-          echo 'Translation WIP !'
+          echo 'Translation WIP!'
           exit 1
         fi
     - name: Setup locale temp 
@@ -88,7 +88,7 @@ jobs:
           exit 1
         fi
     - name: Upload extracted l10n resources
-      if: steps.diff-exit-code.outputs.code == 0
+      if: failure()
       uses: actions/upload-artifact@v1
       with:
         name: l10n-resource
