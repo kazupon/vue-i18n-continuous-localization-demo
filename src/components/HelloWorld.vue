@@ -64,8 +64,8 @@ a {
     "ecosystem": "Ecosystem"
   },
   "ja": {
-    "pulugins": "あ",
-    "ecosystem": "い"
+    "pulugins": "このプロジェクトを構成/カスタマイズする方法に関するガイドとレシピ",
+    "ecosystem": "エコシステム"
   }
 }
 </i18n>
