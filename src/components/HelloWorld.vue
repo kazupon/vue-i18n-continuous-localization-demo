@@ -62,6 +62,10 @@ a {
   "en": {
     "pulugins": "For a guide and recipes on how to configure / customize this project",
     "ecosystem": "Ecosystem"
+  },
+  "ja": {
+    "pulugins": "",
+    "ecosystem": ""
   }
 }
 </i18n>
