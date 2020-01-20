@@ -45,14 +45,12 @@ export default {
 <i18n>
 {
   "en": {
-    "lang": "Languages",
-    "japanese": "Japanese",
-    "english": "English"
+    "lang": "Change languages",
+    "title": "Application"
   },
   "ja": {
-    "lang": "言語",
-    "japanese": "日本語",
-    "english": "英語"
+    "lang": "言語切り替え",
+    "title": "アプリケーション"
   }
 }
 </i18n>
