@@ -105,3 +105,43 @@ jobs:
     - name: Import localization resource to l10n service
       run: |
         npx vue-i18n-locale-message push --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --normalize=flat --target-paths=./tmp/*.json --filename-match=^\([\\w]*\)\\.json
+
+  export:
+    name: Export xliff format l10n resource from l10n service
+    runs-on: ubuntu-latest
+    needs: [push]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Use Node.js v12
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Get npm cache directory
+        id: npm-cache
+        run: |
+          echo "::set-output name=dir::$(npm config get cache)"
+      - name: Cache npm
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.npm-cache.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Install dependency modules
+        # DISABLE: due to not cache-hit poeditor-service-provider ...
+        # if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
+      - name: Setup export locale message temp 
+        run: |
+          mkdir -p ./tmp
+      - name: Export xliff format l10n resource from l10n service
+        run: |
+          npx vue-i18n-locale-message export --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --output=./tmp --format=xliff
+      - name: Upload exported l10n resources
+        if: success()
+        uses: actions/upload-artifact@v1
+        with:
+          name: exported-l10n-resource
+          path: tmp 
