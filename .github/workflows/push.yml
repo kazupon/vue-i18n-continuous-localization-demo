@@ -1,12 +1,12 @@
 name: Push locale messages
 
-#on:  [push]
-on:
-  pull_request:
-    types:
-      - closed
-    branches:
-      - master
+on:  [push]
+#on:
+#  pull_request:
+#    types:
+#      - closed
+#    branches:
+#      - master
 
 env:
   POEDITOR_API_TOKEN: ${{ secrets.POEDITOR_API_TOKEN }}
@@ -63,7 +63,7 @@ jobs:
         npx vue-i18n-locale-message sqz --target=./src --split --output=./tmp
     - name: Fill undedined fields of locale messages
       run: |
-        npx vue-i18n-locale-message list --locale=en --target-paths=./tmp/*.json --filename-match=^\([\\w]*\)\\.json
+        npx vue-i18n-locale-message list --locale=en --define --target-paths=./tmp/*.json --filename-match=^\([\\w]*\)\\.json
     - name: Check locale message differences
       uses: ./.github/actions/locale-message-diff-action
     - name: Upload extracted l10n resources
