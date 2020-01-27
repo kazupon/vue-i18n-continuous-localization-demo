@@ -60,7 +60,7 @@ jobs:
         mkdir -p ./tmp
     - name: Extract l10n resources from SFCs
       run: |
-        DEBUG=*:utils npx vue-i18n-locale-message sqz --target=./src --split --output=./tmp --bundleWith=./src/locales/*.json --bundleMatch=^\([\\w]*\)\\.json$ --namespace=./namespace.json
+        DEBUG=*:utils npx vue-i18n-locale-message sqz --target=./src --split --output=./tmp --bundleWith=./src/locales/*.json --bundleMatch=\([\\w]*\)\\.json$ --namespace=./namespace.json
         cat ./tmp/en.json
         cat ./tmp/ja.json
     - name: Fill undedined fields of locale messages
