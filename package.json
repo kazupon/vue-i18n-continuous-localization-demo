@@ -38,7 +38,7 @@
     "poeditor-service-provider": "^0.7.0",
     "tmp-promise": "^2.0.2",
     "vue-cli-plugin-i18n": "^0.6.0",
-    "vue-i18n-locale-message": "^0.15.0",
+    "vue-i18n-locale-message": "^0.16.0",
     "vue-template-compiler": "^2.6.10"
   },
   "eslintConfig": {
