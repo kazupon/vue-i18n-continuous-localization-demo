@@ -1,8 +1,4 @@
 {
-  "App": {
-    "title": "アプリケーション",
-    "lang": "言語切り替え"
-  },
   "components": {
     "Modal": {
       "ok": "OK",
