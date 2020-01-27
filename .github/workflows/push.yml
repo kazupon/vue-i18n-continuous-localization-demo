@@ -1,12 +1,12 @@
 name: Push locale messages
 
-on:  [push]
-#on:
-#  pull_request:
-#    types:
-#      - closed
-#    branches:
-#      - master
+#on:  [push]
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - master
 
 env:
   POEDITOR_API_TOKEN: ${{ secrets.POEDITOR_API_TOKEN }}
@@ -60,9 +60,7 @@ jobs:
         mkdir -p ./tmp
     - name: Extract l10n resources from SFCs
       run: |
-        DEBUG=*:utils npx vue-i18n-locale-message sqz --target=./src --split --output=./tmp --bundleWith=./src/locales/*.json --bundleMatch=\([\\w]*\)\\.json$ --namespace=./namespace.json
-        cat ./tmp/en.json
-        cat ./tmp/ja.json
+        npx vue-i18n-locale-message sqz --target=./src --split --output=./tmp --bundleWith=./src/locales/*.json --bundleMatch=\([\\w]*\)\\.json$ --namespace=./namespace.json
     - name: Fill undedined fields of locale messages
       run: |
         npx vue-i18n-locale-message list --locale=en --define --target-paths=./tmp/*.json --filename-match=^\([\\w]*\)\\.json
