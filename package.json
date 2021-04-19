@@ -32,7 +32,7 @@
     "@vue/cli-service": "^4.1.0",
     "@vue/test-utils": "1.1.4",
     "babel-eslint": "^10.1.0",
-    "eslint": "^5.16.0",
+    "eslint": "^7.0.0",
     "eslint-plugin-vue": "^6.0.0",
     "execa": "^4.0.0",
     "poeditor-service-provider": "^0.7.0",
