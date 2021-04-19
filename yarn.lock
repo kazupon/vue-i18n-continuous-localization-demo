@@ -9694,7 +9694,7 @@ vue-i18n-locale-message@^0.16.0:
     vue-template-compiler "^2.6.10"
     yargs "^15.1.0"
 
-vue-i18n@^8.0.0:
+vue-i18n@^8.15.3:
   version "8.15.3"
   resolved "https://registry.npmjs.org/vue-i18n/-/vue-i18n-8.15.3.tgz"
   integrity sha512-PVNgo6yhOmacZVFjSapZ314oewwLyXHjJwAqjnaPN1GJAJd/dvsrShGzSiJuCX4Hc36G4epJvNXUwO8y7wEKew==
