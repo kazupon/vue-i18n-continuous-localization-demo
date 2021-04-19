@@ -20,7 +20,7 @@
     "i18n:export": "vue-i18n-locale-message export --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --output=./src/locales/pull --format=xliff"
   },
   "dependencies": {
-    "core-js": "^3.4.3",
+    "core-js": "^3.10.2",
     "vue": "^2.6.10",
     "vue-i18n": "^8.0.0"
   },
