@@ -36,7 +36,7 @@
     "eslint-plugin-vue": "^6.0.0",
     "execa": "^4.0.0",
     "poeditor-service-provider": "^0.7.0",
-    "tmp-promise": "^2.0.2",
+    "tmp-promise": "^3.0.0",
     "vue-cli-plugin-i18n": "^1.0.0",
     "vue-i18n-locale-message": "^0.16.0",
     "vue-template-compiler": "^2.6.10"
