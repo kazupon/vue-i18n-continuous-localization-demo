@@ -56,7 +56,7 @@ jobs:
     - name: Remove temp locales
       run: rm -rf ./tmp
     - name: Create pull request
-      uses: peter-evans/create-pull-request@v2
+      uses: peter-evans/create-pull-request@v3
       id: cpr
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
