@@ -33,7 +33,7 @@ jobs:
       if: steps.cache.outputs.cache-hit != 'true'
       run: npm ci
     - name: Get l10n labeled issue count
-      uses: kazupon/issue-count-action@v0.3.0
+      uses: kazupon/issue-count-action@v1.0.0
       id: issue
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
