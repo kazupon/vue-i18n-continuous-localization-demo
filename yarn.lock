@@ -9700,10 +9700,10 @@ vue-i18n-extract@1.0.2:
     is-valid-glob "^1.0.0"
     yargs "^13.2.2"
 
-vue-i18n-locale-message@^0.16.0:
-  version "0.16.0"
-  resolved "https://registry.npmjs.org/vue-i18n-locale-message/-/vue-i18n-locale-message-0.16.0.tgz"
-  integrity sha512-GEHa9W9OUlrXUTexcIg/9qa0uL9sJcAWcNUk7oitU2aENUn1+qDKwfuFOuRi8eHXk4OlZOp7BjouGb7TQ917hg==
+vue-i18n-locale-message@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/vue-i18n-locale-message/-/vue-i18n-locale-message-1.0.0.tgz"
+  integrity sha512-dgKidB67i470nsd5LuJKqootwkBEFW8ihyQdCpCwBDStQAu7Beom6BxJXoVbggtTIyMPltbn8c/6xbV7w1s0Kw==
   dependencies:
     "@vue/component-compiler-utils" "^3.0.0"
     debug "^4.1.1"
