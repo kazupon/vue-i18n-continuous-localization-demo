@@ -68,7 +68,7 @@ jobs:
       uses: ./.github/actions/locale-message-diff-action
     - name: Upload extracted l10n resources
       if: success()
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v4
       with:
         name: l10n-resource
         path: tmp
@@ -101,7 +101,7 @@ jobs:
       # if: steps.cache.outputs.cache-hit != 'true'
       run: npm ci
     - name: Download l10n resources
-      uses: actions/download-artifact@v1
+      uses: actions/download-artifact@v4
       with:
         name: l10n-resource
         path: tmp
@@ -144,7 +144,7 @@ jobs:
           npx vue-i18n-locale-message export --provider=poeditor-service-provider --conf=poeditor-service-provider-conf.json --output=./tmp --format=xliff
       - name: Upload exported l10n resources
         if: success()
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         with:
           name: exported-l10n-resource
           path: tmp 
