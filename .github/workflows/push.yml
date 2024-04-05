@@ -20,7 +20,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v1
     - name: Use Node.js v12
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v4
       with:
         node-version: 12
     - name: Get npm cache directory
@@ -82,7 +82,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v1
     - name: Use Node.js v12
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v4
       with:
         node-version: 12
     - name: Get npm cache directory
@@ -118,7 +118,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Use Node.js v12
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
           node-version: 12
       - name: Get npm cache directory
